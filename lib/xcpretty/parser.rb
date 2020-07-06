@@ -61,6 +61,7 @@ module XCPretty
     # $1 compiler_command
     # $2 file_path
     COMPILE_COMMAND_MATCHER = /^\s*(.*clang\s.*\s\-c\s(.*\.(?:m|mm|c|cc|cpp|cxx))\s.*\.o)$/
+    SWIFT_COMPILE_COMMAND_MATCHER = /^\s*(.*swift\s\-frontend\s.*\s\-primary\-file\s(.*\.(?:swift))\s.*)$/
 
     # @regex Captured groups
     # $1 file_path
@@ -345,6 +346,8 @@ module XCPretty
       when COMPILE_MATCHER
         formatter.format_compile($2, $1)
       when COMPILE_COMMAND_MATCHER
+        formatter.format_compile_command($1, $2)
+      when SWIFT_COMPILE_COMMAND_MATCHER
         formatter.format_compile_command($1, $2)
       when COMPILE_XIB_MATCHER
         formatter.format_compile_xib($2, $1)
